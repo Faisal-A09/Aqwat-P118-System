@@ -12,27 +12,38 @@ AQ.ICONS = {
 /* Each module = separate lazily-loaded HTML file under modules/ */
 AQ.MODULES = [
   { id: 'ele', dept: 'fcm', abbr: 'ELE', color: '#33c9ff', file: 'modules/ele.html',
+    meta: { dur: 18, diff: "intermediate", prereq: [],
+      objEn: ["Read the MV single-line diagram", "Explain ATS transfer on utility loss", "Describe UPS and generator roles"], objAr: ["قراءة مخطط الجهد المتوسط أحادي الخط", "شرح تحويل ATS عند انقطاع الشبكة", "توصيف دور UPS والمولدات"] },
     en: { name: 'Compound Power &amp; Security', desc: 'MV 13.8 kV single-line diagram, ATS transfer sequence, generators, UPS, fire &amp; CCTV — with a 3D power simulation.' },
     ar: { name: 'الطاقة والأمن للمجمع', desc: 'مخطط أحادي الخط 13.8 كيلوفولت، تتابع نقل ATS، المولدات، UPS، الإنذار والمراقبة — مع محاكاة ثلاثية الأبعاد للطاقة.' } },
   { id: 'aws', dept: 'fcm', abbr: 'AWS', color: '#38bdf8', file: 'modules/aws.html',
+    meta: { dur: 16, diff: "beginner", prereq: [],
+      objEn: ["Trace RO water treatment stages", "Explain firefighting pump sequence", "Describe two-stage air compression"], objAr: ["تتبع مراحل معالجة المياه بالتناضح العكسي", "شرح تتابع مضخات الحريق", "توصيف ضغط الهواء على مرحلتين"] },
     en: { name: 'Water, Fire &amp; Air Systems', desc: 'RO water treatment, firefighting pump logic and the compressed-air line — two live 3D process simulations.' },
     ar: { name: 'أنظمة المياه والحريق والهواء', desc: 'معالجة المياه بالتناضح العكسي، منطق مضخات الحريق وخط الهواء المضغوط — محاكاتان ثلاثيتا الأبعاد.' } },
   { id: 'mr4', dept: 'fcm', abbr: 'MR4', color: '#39c4ff', file: 'modules/mr4.html',
+    meta: { dur: 22, diff: "advanced", prereq: ["aws"],
+      objEn: ["Follow the R-22 refrigeration cycle", "Identify compressor/condenser roles", "Read SCADA + AKC control"], objAr: ["متابعة دورة تبريد R-22", "تحديد أدوار الضواغط والمكثفات", "قراءة تحكم SCADA + AKC"] },
     en: { name: 'MR4 Cooling System', desc: 'R-22 digital twin — 15 compressors, 9 condensers, receiver, expansion and cold-room evaporators with SCADA + AKC.' },
     ar: { name: 'نظام التبريد MR4', desc: 'توأم رقمي لـ R-22 — 15 ضاغطًا، 9 مكثفات، مستقبل سائل، تمدد ومبخرات الغرفة الباردة مع SCADA + AKC.' } },
   { id: 'hatchback', dept: 'fcm', abbr: 'HB', color: '#27c6ff', file: 'modules/hatchback.html',
+    meta: { dur: 12, diff: "beginner", prereq: [],
+      objEn: ["Match each HVAC unit to its refrigerant", "Distinguish AHU, split, CRAC and cold stores", "Explain the Freon-free FAU"], objAr: ["مطابقة كل وحدة تكييف بغاز تبريدها", "التمييز بين AHU والسبليت وCRAC وغرف التبريد", "شرح وحدة FAU الخالية من الفريون"] },
     en: { name: 'Hatchback HVAC Units', desc: 'Air-conditioning units of the Hatchback area, each mapped to its refrigerant — AHU, split, CRAC, cold stores and more.' },
     ar: { name: 'وحدات تكييف الهاتشباك', desc: 'وحدات التكييف والتبريد لمنطقة الهاتشباك، كل وحدة مرتبطة بغاز التبريد الخاص بها — AHU، سبليت، CRAC، غرف التبريد وغيرها.' } },
   { id: 'poultry', dept: 'foe', abbr: 'POU', color: '#2ee06a', file: 'modules/poultry.html',
+    meta: { dur: 20, diff: "intermediate", prereq: [],
+      objEn: ["Follow the breast production line end to end", "Identify freezing/frying/packing stages", "Know the weekly PM window"], objAr: ["متابعة خط إنتاج الصدور من البداية للنهاية", "تحديد مراحل التجميد والقلي والتعبئة", "معرفة نافذة الصيانة الأسبوعية"] },
     en: { name: 'Poultry Production Line', desc: 'Interactive 3D digital twin of the chicken-breast factory — defrosting, rinsing, breading, frying, freezing and packing lines.' },
     ar: { name: 'خط إنتاج الدواجن', desc: 'توأم رقمي تفاعلي ثلاثي الأبعاد لمصنع صدور الدجاج — التذويب، الشطف، التغطية، القلي، التجميد وخطوط التعبئة.' } }
 ];
 
-/* Role-based access: which departments each role may enter.
-   Extend by adding a role here — everything else adapts. */
+/* Role labels are used for context, not to hide module menus.
+   All roles can see and open every module so the full submitted menu set
+   remains visible after refreshes and across GitHub Pages deployments. */
 AQ.ROLES = {
-  fcm_eng:    { depts: ['fcm'],        color: 'var(--fcm)', en: 'FCM Engineer',  ar: 'مهندس مرافق' },
-  foe_eng:    { depts: ['foe'],        color: 'var(--foe)', en: 'FOE Engineer',  ar: 'مهندس عمليات غذاء' },
+  fcm_eng:    { depts: ['fcm', 'foe'], color: 'var(--fcm)', en: 'FCM Engineer',  ar: 'مهندس مرافق' },
+  foe_eng:    { depts: ['fcm', 'foe'], color: 'var(--foe)', en: 'FOE Engineer',  ar: 'مهندس عمليات غذاء' },
   supervisor: { depts: ['fcm', 'foe'], color: 'var(--sup)', en: 'Supervisor',    ar: 'مشرف' }
 };
 
